@@ -22,7 +22,8 @@ public class Game extends JFrame{
             @Override
             public void mouseMoved(MouseEvent e) {
                 super.mouseMoved(e);
-                board.setPlayerPos(e.getX(), e.getY());
+                //board.setPlayerPos(e.getX(), e.getY());
+                board.player.move(e.getX(), e.getY());
             }
         });
 
