@@ -10,7 +10,7 @@ public class Board extends JPanel implements ActionListener {
     Bounds bounds;
     Player player;
     Timer timer;
-    int fillX = 290, fillY=290, drawX = 290, drawY = 290; ;
+    int fillX = 290, fillY=290, drawX = 290, drawY = 290, ticks = 0;
 
     private long lastMoment, currentMoment;
 
@@ -23,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void start(){
-        bounds = new Bounds(Color.white, 10 ,getWidth(), getHeight());
+        bounds = new Bounds(Color.white, 600 ,getWidth(), getHeight());
         player = new Player(Color.red, getWidth()/2, getHeight()/2, 40, bounds);
         timer.start();
         lastMoment = System.currentTimeMillis();
@@ -50,13 +50,14 @@ public class Board extends JPanel implements ActionListener {
         super.paintComponent(g);
         bounds.paint(g);
         g.setColor(Color.white);
+        player.paint(g);
         //g.drawOval(100,100,400,400);
         //g.fillOval(fillX,fillY,20,20);
         //g.drawOval(drawX,drawY, 20,20);
-        player.paint(g);
+
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {repaint();}
+    public void actionPerformed(ActionEvent e) {ticks++; if(ticks%60==0)bounds.decreaseSize(); repaint(); }
 
 }

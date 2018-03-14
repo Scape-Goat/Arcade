@@ -20,6 +20,12 @@ public class Bounds {
         return( ( xDif * xDif )  + ( yDif  * yDif ) < radii * radii);
     }
 
+    public void decreaseSize(){
+        diameter-=5;
+        x = (boardWidth/2)-(diameter/2);
+        y = (boardHeight/2)-(diameter/2);
+    }
+
     public void paint(Graphics g){
         g.setColor(color);
         g.drawOval(x,y,diameter, diameter);

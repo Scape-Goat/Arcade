@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Entity {
+public class Entity implements Move, Paint {
     Color color;
     int x, y, width, height;
 
@@ -30,5 +30,20 @@ public class Entity {
 
     public void paint(Graphics g){
         g.fillOval(x,y,width,height);
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+
+    }
+
+    @Override
+    public void move(int boardHeight, int boardWidth) {
+
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return null;
     }
 }
