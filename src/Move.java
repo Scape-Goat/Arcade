@@ -2,7 +2,7 @@ import java.awt.*;
 
 public interface Move {
 
-    public void move(int boardHeight, int boardWidth);
+    public void move();
 
     public Rectangle getBounds();
 }

@@ -2,7 +2,8 @@ import java.awt.*;
 
 public class Entity implements Move, Paint {
     Color color;
-    int x, y, width, height;
+    int x, y, width, height, dx, dy, MAXSPEED;
+
 
     public Entity(Color color, int x, int y, int width, int height){
         this.color = color;
@@ -38,8 +39,9 @@ public class Entity implements Move, Paint {
     }
 
     @Override
-    public void move(int boardHeight, int boardWidth) {
-
+    public void move() {
+        x+=dx;
+        y+=dy;
     }
 
     @Override

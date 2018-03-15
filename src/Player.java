@@ -11,7 +11,6 @@ public class Player extends Entity {
         this.bounds = bounds;
     }
 
-    @Override
     public void move(int x,int y){
         if(bounds.checkCircleCollision(this, x-width/2, y-height)) {
 
@@ -26,7 +25,9 @@ public class Player extends Entity {
 
     @Override
     public void paint(Graphics g){
+        g.setColor(Color.blue);
         g.fillOval(x, y, width, height);
+        g.setColor(Color.pink);
         g.drawOval(drawX,drawY,width,height);
     }
 }

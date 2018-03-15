@@ -9,6 +9,7 @@ public class Board extends JPanel implements ActionListener {
 
     Bounds bounds;
     Player player;
+    Enemy enemy;
     Timer timer;
     int fillX = 290, fillY=290, drawX = 290, drawY = 290, ticks = 0;
 
@@ -18,13 +19,14 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(600, 600));
         setBackground(Color.black);
         timer = new Timer(1000 / 60, this);
-
+        enemy = new Enemy(30, 30, 5);
 
     }
 
     public void start(){
         bounds = new Bounds(Color.white, 600 ,getWidth(), getHeight());
         player = new Player(Color.red, getWidth()/2, getHeight()/2, 40, bounds);
+
         timer.start();
         lastMoment = System.currentTimeMillis();
     }
@@ -47,17 +49,20 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        bounds.paint(g);
-        g.setColor(Color.white);
-        player.paint(g);
-        //g.drawOval(100,100,400,400);
-        //g.fillOval(fillX,fillY,20,20);
-        //g.drawOval(drawX,drawY, 20,20);
+        if(ticks>0) {
+            super.paintComponent(g);
 
+            bounds.paint(g);
+            g.setColor(Color.white);
+            player.paint(g);
+            enemy.paint(g);
+            //g.drawOval(100,100,400,400);
+            //g.fillOval(fillX,fillY,20,20);
+            //g.drawOval(drawX,drawY, 20,20);
+        }
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {ticks++; if(ticks%60==0)bounds.decreaseSize(); repaint(); }
+    public void actionPerformed(ActionEvent e) {ticks++; if(ticks%60==0)bounds.decreaseSize(); enemy.move(); repaint(); }
 
 }
