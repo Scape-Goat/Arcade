@@ -45,7 +45,7 @@ public class Player extends Entity {
             //shield - sets up an arc that if a enemy touches it they will bounce off but so will player bullets
             case 6: break;
 
-
+            //N
 
         }
 
