@@ -7,22 +7,35 @@ public class Enemy extends Entity {
         super(Color.red,300, 300, width,height);
         this.MAXSPEED = maxSpeed;
         randomPos();
-        setMove();
+
     }
 
     public void randomPos(){
-        this.x = 300-(int)(Math.random()*300);
-        this.y = 300-(int)(Math.random()*300);
+
         System.out.println(x + " " + y);
+        setMove();
     }
 
 
 
     public void setMove(){
-        double angle = Math.atan((double)x/y);
-        this.dx = (int)(MAXSPEED*Math.cos(angle));
-        this.dy = (int)(MAXSPEED*Math.sin(angle));
+        double angle = Math.atan((double)y/x);
+        dx = (MAXSPEED*Math.sin(angle));
+        dy = (MAXSPEED*Math.cos(angle));
+        if(x>300)
+            dx*=-1;
+        if(y>300)
+            dy*=-1;
         System.out.println("DX: " + dx + " DY: " + dy);
+    }
+
+    @Override
+    public void paint(Graphics g){
+        g.fillOval(x,y,width,height);
+        g.drawLine(300,300, x+width/2,y+height/2);
+        g.drawLine(300,300, x+width/2, 300);
+        g.drawLine(x+width/2,300, x+width/2, y+height/2);
+
     }
 
 

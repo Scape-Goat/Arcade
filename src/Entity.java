@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Entity implements Move, Paint {
     Color color;
-    int x, y, width, height, dx, dy, MAXSPEED;
-
+    int x, y, width, height, MAXSPEED;
+double  dx, dy;
 
     public Entity(Color color, int x, int y, int width, int height){
         this.color = color;
