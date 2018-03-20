@@ -13,10 +13,10 @@ public class Bounds {
         y = (boardHeight/2)-(diameter/2);
     }
 
-    public boolean checkCircleCollision(Player player, int x, int y){
-        int xDif = x+player.getWidth()/2 - boardWidth/2;
-        int yDif = y+player.getHeight()/2 - boardHeight/2;
-        int radii = player.getWidth()/2 + diameter/2;
+    public boolean checkCircleCollision(Entity entity, double x, double y){
+        double xDif = x+entity.getWidth()/2 - boardWidth/2;
+        double yDif = y+entity.getHeight()/2 - boardHeight/2;
+        int radii = entity.getWidth()/2 + diameter/2;
         return( ( xDif * xDif )  + ( yDif  * yDif ) < radii * radii);
     }
 

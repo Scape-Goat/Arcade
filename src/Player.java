@@ -1,54 +1,61 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity {
     int drawX, drawY, attackType;
     Bounds bounds;
 
-    int dx = 5, dy = 5;
+    double dx = 5, dy = 5;
+
     public Player(Color color, int x, int y, int diameter, Bounds bounds){
-        super(color, x, y, diameter, diameter);
-        drawX = x;
-        drawY = y;
+        super(x-diameter/2, y-diameter/2, diameter, diameter);
+        drawX = x-diameter/2;
+        drawY = y-diameter/2;
         this.bounds = bounds;
+        MAXSPEED = 2;
     }
 
-    public void move(int x,int y){
-        if(bounds.checkCircleCollision(this, x-width/2, y-height)) {
+    public void moveTarget(int x,int y){
 
-            this.x = x-width/2;
-            this.y = y-height;
-        }
         drawX = x-width/2;
         drawY = y-height;
     }
 
-    public void Attack(){
-        switch(attackType){
-            //normal bullet
-            case 0: break;
 
-            //laser - shoots a laser from player position to the mouse position
-            case 1: break;
+    public void move(){
 
-            //bouncing - if it touchs a wall it will bounce of in a 45 degree angle
-            case 2: break;
+        if(bounds.checkCircleCollision(this, x,y)) {
+            dx = 5;
+            dy = 5;
 
-            //multi shot - shoots 3-5 bullets at a time
-            case 3: break;
-
-            //grenade - if it hits an enemy or if it reaches a certain time limit it will explode in a scatter of bullets
-            case 4: break;
-
-            //ally - sends ally out to attack
-            case 5: break;
-
-            //shield - sets up an arc that if a enemy touches it they will bounce off but so will player bullets
-            case 6: break;
-
-            //N
+            if (Game.isUp() && bounds.checkCircleCollision(this, x, y - dy))
+                y -= dy;
+            if (Game.isDown() && bounds.checkCircleCollision(this, x, y + dy))
+                y += dy;
+            if (Game.isLeft() && bounds.checkCircleCollision(this, x - dx, y))
+                x -= dx;
+            if (Game.isRight() && bounds.checkCircleCollision(this, x + dx, y))
+                x += dx;
+        }
+        else{
+            double angle = Math.atan2(Math.abs(305-y), Math.abs(305-x));
+            dx = MAXSPEED*Math.cos(angle);
+            dy = MAXSPEED*Math.sin(angle);
+            if(300-y<0){
+                dy*=-1;
+            }
+            if(300-x<0){
+                dx*=-1;
+            }
+            y+=dy;
+            x+=dx;
 
         }
+    }
 
+    public void Attack(List<Entity> entities){
+        entities.add(new Bullet( x+width/2-5, y+width/2-5, 10,10,drawX+width/2,drawY+width/2));
     }
 
 
@@ -58,7 +65,7 @@ public class Player extends Entity {
 
     @Override
     public void paint(Graphics g){
-        g.setColor(Color.blue);
+        g.setColor(color);
         g.fillOval(x, y, width, height);
         g.setColor(Color.pink);
         g.drawOval(drawX,drawY,width,height);
