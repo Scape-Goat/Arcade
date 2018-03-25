@@ -25,8 +25,8 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void start(){
-        entityIndex = 20;
-        bounds = new Bounds(Color.white, 600 ,getWidth(), getHeight());
+        entityIndex = 50;
+        bounds = new Bounds(Color.white, 560 ,getWidth(), getHeight());
         player = new Player(Color.red, getWidth()/2, getHeight()/2, 20, bounds);
 
 
@@ -58,20 +58,25 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void checkCollision(){
-        for(int i = 0; i<entities.size()-1; i++){
+        for(int i = 0; i<entities.size(); i++){
+            if(entities.get(i).getBounds().intersects(player.getBounds())&& entities.get(i).getColor().equals(player.getColor())) {
+                System.out.println("Hit");
+                entities.remove(entities.get(i));
+                break;
+            }
             for(int j = 0; j<entities.size()-1; j++){
                 if(i!=j&& entities.get(i).getBounds().intersects(entities.get(j).getBounds())&& entities.get(i).getColor().equals(entities.get(j).getColor())){
                     if(entities.get(i) instanceof Bullet && entities.get(j) instanceof Enemy  ) {
                         entities.remove(entities.get(i));
                         entities.get(j).setRemove(true);
-                        return;
+                        break;
                     }
+
                 }
 
 
             }
-            if(entities.get(i).getBounds().intersects(player.getBounds())&& entities.get(i).getColor().equals(player.getColor()))
-                entities.remove(entities.get(i));
+
         }
         update();
     }

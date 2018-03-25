@@ -21,7 +21,7 @@ public class Bounds {
     }
 
     public void decreaseSize(){
-        diameter-=5;
+        diameter-=10;
         x = (boardWidth/2)-(diameter/2);
         y = (boardHeight/2)-(diameter/2);
     }

@@ -4,16 +4,22 @@ import java.util.List;
 public class Entity implements Move, Paint {
 
     //region Colors
-    Color red = new Color(255,0,0);
-    Color orange = new Color(255,127,0);
-    Color yellow = new Color(255,255,0);
-    Color lime = new Color(127,255,0);
-    Color green = new Color(0,255,0);
-    Color teal = new Color(0,255,127);
-    Color cyan = new Color(0,255,255);
-    Color lightBlue = new Color(0,127,255);
-    Color blue = new Color(0,0,255);
-    Color[] colors = {red,orange,yellow,lime,green,teal,cyan, lightBlue,blue};
+    Color white = new Color(255,255,255);
+    Color red = new Color(255,80,80);
+    //Color pink = new Color(255, 51, 153);
+    Color magenta = new Color(255, 0, 255);
+    Color purple = new Color(153, 102, 255);
+    Color blue = new Color(51, 102, 255);
+    //Color lightBlue = new Color(0, 153, 255);
+    //Color teal = new Color(51, 204, 204);
+    Color turquoise = new Color(0, 255, 153);
+    Color green = new Color(51, 204, 51);
+    //Color lime = new Color(153, 255, 51);
+    Color yellow = new Color(255, 255, 0);
+    Color orange = new Color(255, 153, 51);
+
+
+    Color[] colors = {white, red, magenta, purple, blue, turquoise, green, yellow, orange};
     //endregion
 
 
@@ -59,6 +65,14 @@ double  dx, dy;
     public void setPosition(int x, int y) {
 
     }
+
+    public void bounce(int t){
+        if(t==0)
+        dx*=-1;
+        if(t==1)
+            dy*=-1;
+    }
+
 
     public void randomColor(){
         color = colors[(int)(Math.random()*colors.length)];
