@@ -10,9 +10,11 @@ public class Game extends JFrame{
     static boolean up=false,left = false,right = false,down = false, shoot = false;
 
     public Game(){
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        setResizable(false);
+        setResizable(true);
+        setExtendedState(MAXIMIZED_BOTH);
         setTitle("SHAPES EXTREME");
         board = new Board();
         add(board);
@@ -95,6 +97,25 @@ public class Game extends JFrame{
 
                 if(e.getKeyCode() == KeyEvent.VK_SPACE){
                     shoot = false;
+                }
+
+            if(e.getKeyCode() == KeyEvent.VK_P && (STATS.isPlay() || STATS.isPause())){
+
+                    STATS.togglePause();
+                }
+
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    if(STATS.isMenu()){
+                        STATS.startInstructions();
+                    }
+                    else if(STATS.isInstructions()){
+                        STATS.startGame();
+                    }
+                    else if(STATS.isEnd()){
+                        STATS.reset();
+                        STATS.startGame();
+
+                    }
                 }
             }
         });
